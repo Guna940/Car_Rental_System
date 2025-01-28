@@ -1,0 +1,30 @@
+<nz-spin [nzSpinning]="isSpinning">
+  <div *ngIf="bookings.length > 0; else noBookings">
+    <div *ngFor="let booking of bookings" class="booking-card">
+      <!-- Car Image -->
+      <div class="booking-image">
+        <img [src]="booking.carImage" alt="Car Image" />
+      </div>
+
+      <!-- Booking Details -->
+      <div class="booking-details">
+        <h3>Booking ID: {{ booking.id }}</h3>
+        <p>
+          <b>Car:</b> {{ booking.carName }}<br />
+          <b>From Date:</b> {{ booking.fromDate | date: 'MM/dd/yyyy' }}<br />
+          <b>To Date:</b> {{ booking.toDate | date: 'MM/dd/yyyy' }}<br />
+          <b>Price:</b> ${{ booking.price }}<br />
+          <b>Status:</b> <span [ngClass]="getStatusClass(booking.bookCarStatus)">{{ booking.bookCarStatus }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fallback for no bookings -->
+  <ng-template #noBookings>
+    <div class="no-bookings">
+      <img src="assets/no-bookings.png" alt="No Bookings" />
+      <p>No bookings found! Book your first car now.</p>
+    </div>
+  </ng-template>
+</nz-spin>
